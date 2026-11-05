@@ -1,0 +1,368 @@
+@import "tailwindcss";
+
+/*
+  limiterdB design tokens.
+  Flat black surfaces, one accent: the yellow limit line from the app icon.
+  Zone colors (safe / warn / danger) are only used for live readings.
+*/
+@theme {
+  --font-sans: "Geist", ui-sans-serif, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+
+  --color-ink: #000000;
+  --color-panel: #181818;
+  --color-panel-2: #1f1f1f;
+  --color-panel-3: #272727;
+  --color-line: #272727;
+  --color-line-strong: #313131;
+
+  --color-fg: #fafafa;
+  --color-dim: #a3a3a3;
+  --color-mute: #767676;
+
+  --color-limit: oklch(83% 0.165 85);
+  --color-limit-hi: oklch(88% 0.14 88);
+
+  --color-safe: oklch(72% 0.17 150);
+  --color-warn: oklch(73% 0.165 58);
+  --color-danger: oklch(64% 0.21 25);
+
+  --ease-base: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-rise: rise 700ms var(--ease-base) both;
+  --animate-grow: grow 900ms var(--ease-base) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(32px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes grow {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+
+/* Named text styles. Every text element uses one of these. */
+@utility heading-1 {
+  font-size: var(--text-6xl);
+  line-height: var(--text-6xl--line-height);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+@utility heading-2 {
+  font-size: var(--text-5xl);
+  line-height: var(--text-5xl--line-height);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+@utility heading-3 {
+  font-size: var(--text-4xl);
+  line-height: var(--text-4xl--line-height);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+@utility heading-4 {
+  font-size: var(--text-3xl);
+  line-height: var(--text-3xl--line-height);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+@utility heading-5 {
+  font-size: var(--text-2xl);
+  line-height: var(--text-2xl--line-height);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+@utility heading-6 {
+  font-size: var(--text-xl);
+  line-height: var(--text-xl--line-height);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+@utility title-2 {
+  font-size: var(--text-lg);
+  line-height: var(--text-lg--line-height);
+  font-weight: 500;
+}
+@utility title-3 {
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+  font-weight: 500;
+}
+@utility title-4 {
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  font-weight: 500;
+}
+@utility title-5 {
+  font-size: var(--text-xs);
+  line-height: var(--text-xs--line-height);
+  font-weight: 500;
+}
+@utility body-3 {
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+  font-weight: 400;
+}
+@utility body-4 {
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  font-weight: 600;
+}
+@utility body-6 {
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  font-weight: 400;
+}
+/* Lead paragraph under section headings. */
+@utility body-7 {
+  font-size: var(--text-lg);
+  line-height: var(--text-lg--line-height);
+  font-weight: 400;
+}
+@utility button-md {
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+  font-weight: 600;
+}
+@utility button-sm {
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  font-weight: 600;
+}
+@utility caption-1 {
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  font-weight: 500;
+}
+@utility caption-3 {
+  font-size: var(--text-xs);
+  line-height: var(--text-xs--line-height);
+  font-weight: 600;
+}
+@utility caption-4 {
+  font-size: var(--text-xs);
+  line-height: var(--text-xs--line-height);
+  font-weight: 500;
+}
+@utility caption-5 {
+  font-size: var(--text-xs);
+  line-height: var(--text-xs--line-height);
+  font-weight: 400;
+}
+
+/* Hero heading: the only gradient on the page, and only on text. */
+@utility text-hero {
+  background: linear-gradient(to right, #ffffff, #9b9b9b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-ink);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-limit);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--color-limit);
+    color: var(--color-ink);
+  }
+}
+
+/* Main button: the one action on this page. */
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: var(--radius-lg);
+  background: var(--color-limit);
+  color: var(--color-ink);
+  transition:
+    background-color 300ms var(--ease-base),
+    transform 200ms var(--ease-base);
+  &:hover {
+    background: var(--color-limit-hi);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+@utility btn-quiet {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: var(--radius-lg);
+  color: var(--color-dim);
+  transition:
+    color 300ms var(--ease-base),
+    background-color 300ms var(--ease-base),
+    transform 200ms var(--ease-base);
+  &:hover {
+    color: var(--color-fg);
+    background: var(--color-panel);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Scroll reveal: rise 32px and fade in, once. */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 700ms var(--ease-base),
+    transform 700ms var(--ease-base);
+  transition-delay: var(--d, 0ms);
+}
+.reveal[data-shown] {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-x {
+  transform: scaleX(0);
+  transition: transform 900ms var(--ease-base);
+  transition-delay: var(--d, 0ms);
+}
+[data-shown] .reveal-x {
+  transform: none;
+}
+
+/* Tagline: each word lights up as it crosses the trigger line. */
+.tagline-word {
+  opacity: 0.3;
+  transition: opacity 500ms var(--ease-base);
+}
+.tagline-word[data-on] {
+  opacity: 1;
+}
+
+/* Range input styled as the yellow limit line. */
+.limit-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 24px;
+  background: transparent;
+  cursor: pointer;
+}
+.limit-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--color-limit) 0 var(--fill, 50%),
+    var(--color-panel-3) var(--fill, 50%) 100%
+  );
+}
+.limit-range::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--color-panel-3);
+}
+.limit-range::-moz-range-progress {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--color-limit);
+}
+.limit-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  margin-top: -8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--color-fg);
+  border: 4px solid var(--color-limit);
+  transition: transform 200ms var(--ease-base);
+}
+.limit-range:active::-webkit-slider-thumb {
+  transform: scale(1.1);
+}
+.limit-range::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--color-fg);
+  border: 4px solid var(--color-limit);
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    transform: none;
+    transition: opacity 300ms var(--ease-base);
+  }
+  .reveal-x {
+    transform: none;
+    transition: none;
+  }
+  .tagline-word {
+    opacity: 1;
+    transition: none;
+  }
+  .animate-rise {
+    animation-name: fade;
+  }
+  .animate-grow {
+    animation: none;
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+  }
+}

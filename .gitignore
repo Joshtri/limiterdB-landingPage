@@ -1,0 +1,18 @@
+node_modules
+dist
+
+# Cloudflare Wrangler local state
+.wrangler
+.dev.vars*
+
+# Env files
+.env
+.env.*
+
+# Logs and OS/editor clutter
+*.log
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea

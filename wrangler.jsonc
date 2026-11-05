@@ -1,0 +1,7 @@
+// Landing page statis di Cloudflare Pages (limiterdb.pages.dev): hasil `npm run build` di dist
+{
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "name": "limiterdb",
+  "compatibility_date": "2026-10-07",
+  "pages_build_output_dir": "./dist"
+}
